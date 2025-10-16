@@ -610,8 +610,72 @@
 
     <!-- JavaScript igual que antes -->
     <script>
-        // ... todo el JavaScript permanece exactamente igual ...
-        // Solo asegúrate de que el HTML del input-group-custom coincida con los IDs
+      // Obtener elementos
+const addButton = document.getElementById('addButton');
+const saveListButton = document.getElementById('saveListButton');
+const shoppingList = document.getElementById('shoppingList');
+const newItemInput = document.getElementById('newItem');
+const itemQuantity = document.getElementById('itemQuantity');
+
+// Función para actualizar localStorage
+function guardarLista() {
+    const items = [];
+    shoppingList.querySelectorAll('li').forEach(li => {
+        const texto = li.querySelector('.item-info').innerText;
+        const cantidad = li.querySelector('.item-quantity').innerText;
+        items.push({ texto, cantidad });
+    });
+    localStorage.setItem('shoppingList', JSON.stringify(items));
+    alert('✅ Lista guardada en el navegador');
+}
+
+// Cargar lista al inicio
+function cargarLista() {
+    const items = JSON.parse(localStorage.getItem('shoppingList') || '[]');
+    items.forEach(item => {
+        agregarItemLista(item.texto, item.cantidad);
+    });
+}
+
+// Función para agregar item al DOM
+function agregarItemLista(texto, cantidad) {
+    const li = document.createElement('li');
+    li.className = 'list-group-item';
+
+    li.innerHTML = `
+        <span class="item-quantity">${cantidad}</span>
+        <span class="item-info">${texto}</span>
+        <button class="btn btn-danger btn-sm remove-item">❌</button>
+    `;
+
+    // Botón eliminar
+    li.querySelector('.remove-item').addEventListener('click', () => {
+        li.remove();
+        guardarLista();
+    });
+
+    shoppingList.appendChild(li);
+}
+
+// Añadir botón "Añadir"
+addButton.addEventListener('click', () => {
+    const texto = newItemInput.value.trim();
+    const cantidad = itemQuantity.value || 1;
+    if (texto === '') return;
+    agregarItemLista(texto, cantidad);
+    newItemInput.value = '';
+    itemQuantity.value = 1;
+    guardarLista();
+});
+
+// Botón guardar explícito
+saveListButton.addEventListener('click', () => {
+    guardarLista();
+});
+
+// Cargar lista al iniciar la página
+cargarLista();
+
     </script>
 </body>
 
