@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts - Fuente manuscrita -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Reenie+Beanie&display=swap"
+        rel="stylesheet">
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -15,42 +17,42 @@
             font-family: 'Caveat', cursive;
             padding: 20px 0;
         }
-        
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 0 15px;
         }
-        
+
         .header {
             text-align: center;
             color: white;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .header h1 {
             font-family: 'Reenie Beanie', cursive;
             font-size: 3.5rem;
             margin: 0;
             font-weight: 400;
         }
-        
+
         .tabs-container {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
             backdrop-filter: blur(10px);
         }
-        
+
         .nav-tabs {
             border: none;
             justify-content: center;
         }
-        
+
         .nav-tabs .nav-link {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
             font-family: 'Caveat', cursive;
@@ -60,22 +62,22 @@
             margin: 0 5px;
             transition: all 0.3s ease;
         }
-        
+
         .nav-tabs .nav-link.active {
             background: linear-gradient(45deg, #4CAF50, #45a049);
             color: white;
-            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
         }
-        
+
         .nav-tabs .nav-link:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
         }
-        
+
         .notebook {
             background: #fff url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="paper" width="100" height="100" patternUnits="userSpaceOnUse"><rect fill="%23f5f5f5" width="100" height="100"/><path d="M 0,20 L 100,20 M 0,40 L 100,40 M 0,60 L 100,60 M 0,80 L 100,80" stroke="%23999" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100%" height="100%" fill="url(%23paper)"/></svg>') repeat;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             padding: 30px;
             margin-bottom: 20px;
             border: 20px solid #8B4513;
@@ -83,7 +85,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .notebook::before {
             content: '';
             position: absolute;
@@ -94,7 +96,7 @@
             background: linear-gradient(90deg, #654321 0%, #8B4513 50%, #654321 100%);
             border-radius: 15px 15px 0 0;
         }
-        
+
         .notebook::after {
             content: '📝';
             position: absolute;
@@ -105,21 +107,21 @@
             background: #8B4513;
             border-radius: 50%;
             padding: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        
+
         /* Input group mejorado para móvil */
         .input-group-custom {
             display: flex;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 25px;
             padding: 5px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             gap: 5px;
             align-items: stretch;
         }
-        
+
         .form-control {
             border: none;
             background: transparent;
@@ -128,58 +130,60 @@
             padding: 15px 20px;
             flex: 1;
         }
-        
+
         .form-control.quantity {
             max-width: 100px;
             font-size: 1.2rem;
             border-right: 1px solid #ddd;
             text-align: center;
         }
-        
+
         .form-control.main-item {
             flex-grow: 2;
             font-size: 1.5rem;
             border-left: 1px solid #ddd;
             border-radius: 0;
         }
-        
+
         .form-control::placeholder {
             color: #999;
             font-family: 'Caveat', cursive;
         }
-        
-        .btn-primary, .btn-save-list {
+
+        .btn-primary,
+        .btn-save-list {
             font-family: 'Caveat', cursive;
             font-size: 1.2rem;
             padding: 15px 20px;
             background: linear-gradient(45deg, #4CAF50, #45a049);
             border: none;
-            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
             border-radius: 20px;
             white-space: nowrap;
             flex-shrink: 0;
         }
-        
+
         .btn-save-list {
             background: linear-gradient(45deg, #2196F3, #1976D2);
             padding: 15px 15px;
             font-size: 1rem;
         }
-        
-        .btn-primary:hover, .btn-save-list:hover {
+
+        .btn-primary:hover,
+        .btn-save-list:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         /* Resto de estilos igual... */
         .list-group-item {
-            background: rgba(255,255,255,0.8);
+            background: rgba(255, 255, 255, 0.8);
             border: none;
             margin-bottom: 10px;
             border-radius: 10px;
             padding: 15px;
             font-family: 'Caveat', cursive;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -187,12 +191,12 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        
+
         .list-group-item:hover {
             transform: translateX(5px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
-        
+
         .item-info {
             flex-grow: 1;
             margin-left: 15px;
@@ -200,7 +204,7 @@
             font-size: 1.6rem;
             min-width: 0;
         }
-        
+
         .item-quantity {
             background: #e8f5e8;
             border-radius: 50%;
@@ -215,7 +219,7 @@
             font-size: 1.1rem;
             flex-shrink: 0;
         }
-        
+
         .price-input {
             border: 2px solid #4CAF50;
             border-radius: 10px;
@@ -228,13 +232,13 @@
             margin-left: 10px;
             flex-shrink: 0;
         }
-        
+
         .price-input:focus {
             border-color: #388E3C;
             box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
             outline: none;
         }
-        
+
         .total-price {
             background: linear-gradient(45deg, #4CAF50, #45a049);
             color: white;
@@ -244,9 +248,9 @@
             font-size: 2rem;
             text-align: center;
             margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
         }
-        
+
         .btn-danger {
             font-family: 'Caveat', cursive;
             padding: 8px 15px;
@@ -255,75 +259,76 @@
             border: none;
             flex-shrink: 0;
         }
-        
-        .btn-warning, .btn-success {
+
+        .btn-warning,
+        .btn-success {
             font-family: 'Caveat', cursive;
             padding: 10px 20px;
             border-radius: 20px;
             border: none;
         }
-        
+
         .btn-warning {
             background: linear-gradient(45deg, #ff9800, #f57c00);
         }
-        
+
         .btn-success {
             background: linear-gradient(45deg, #4CAF50, #388E3C);
         }
-        
+
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         .struck {
             text-decoration: line-through;
             color: #999;
             opacity: 0.7;
         }
-        
+
         .struck .item-quantity {
             background: #f5f5f5;
             color: #999;
         }
-        
+
         .struck .price-input {
             border-color: #999;
             background: rgba(153, 153, 153, 0.1);
             color: #999;
         }
-        
+
         .saved-lists {
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             padding: 20px;
             margin-top: 20px;
             border: 3px solid #8B4513;
         }
-        
+
         .list-thumbnail {
             background: #fff;
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-left: 5px solid #4CAF50;
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        
+
         .list-thumbnail:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
-        
+
         .list-thumbnail h6 {
             font-family: 'Reenie Beanie', cursive;
             font-size: 1.5rem;
             margin-bottom: 10px;
             color: #333;
         }
-        
+
         .list-summary {
             font-size: 0.9rem;
             color: #666;
@@ -331,158 +336,254 @@
             justify-content: space-between;
             margin-top: 5px;
         }
-        
+
         .btn-list-action {
             padding: 5px 10px;
             font-size: 0.8rem;
             border-radius: 10px;
             margin: 0 2px;
         }
-        
-        .btn-load { background: linear-gradient(45deg, #4CAF50, #45a049); color: white; border: none; }
-        .btn-delete-list { background: linear-gradient(45deg, #f44336, #d32f2f); color: white; border: none; }
-        
-        /* Media Queries mejoradas */
+
+        .btn-load {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+        }
+
+        .btn-delete-list {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+            color: white;
+            border: none;
+        }
+
         @media (max-width: 768px) {
-            .container { 
-                max-width: 100%; 
-                padding: 10px 15px; 
-            }
-            
-            .header h1 { 
-                font-size: 2rem; 
-            }
-            
-            .notebook { 
-                padding: 20px 15px; 
-                border-width: 10px;
-            }
-            
-            /* Input group MOBIL - Layout vertical optimizado */
-            .input-group-custom {
-                flex-direction: column;
-                gap: 8px;
-                padding: 10px;
-            }
-            
-            .form-control.quantity {
-                max-width: none;
-                width: 100%;
-                border: none;
-                border-radius: 15px;
-                background: rgba(255,255,255,0.8);
-                border-right: none;
-            }
-            
-            .form-control.main-item {
-                flex-grow: 1;
-                width: 100%;
-                border-left: none;
-                border-radius: 15px;
-                background: rgba(255,255,255,0.8);
-                font-size: 1.3rem;
-                padding: 18px 20px;
-            }
-            
-            .btn-primary, .btn-save-list {
-                width: 100%;
-                margin: 5px 0;
-                padding: 18px;
-                font-size: 1.1rem;
-                border-radius: 15px;
-            }
-            
-            .list-group-item {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 15px;
-                gap: 10px;
-            }
-            
-            .item-info {
-                margin-left: 0;
-                width: 100%;
-                font-size: 1.4rem;
-            }
-            
-            .price-input {
-                width: 70px;
-                margin-left: 0;
-                margin-top: 5px;
-            }
-            
-            .btn-danger {
-                align-self: flex-end;
+            .container {
+                max-width: 100%;
                 padding: 10px 15px;
             }
-            
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .notebook {
+                padding: 20px 15px;
+                border-width: 10px;
+            }
+
+            /* Input group MOBIL - Layout vertical optimizado */
+            /* INPUT GROUP MOBIL - FUERZA EL 100% DE ANCHO */
+            .input-group-custom {
+                flex-direction: column !important;
+                gap: 8px !important;
+                padding: 10px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .input-group-custom>* {
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: none !important;
+                margin: 0 !important;
+                display: block !important;
+            }
+
+            .form-control.quantity {
+                width: 100% !important;
+                max-width: none !important;
+                border: none !important;
+                border-radius: 15px !important;
+                background: rgba(255, 255, 255, 0.9) !important;
+                border-right: none !important;
+                flex: none !important;
+                box-sizing: border-box !important;
+            }
+
+            .form-control.main-item {
+                width: 100% !important;
+                flex: none !important;
+                border-left: none !important;
+                border-radius: 15px !important;
+                background: rgba(255, 255, 255, 0.9) !important;
+                font-size: 1.3rem;
+                padding: 18px 20px !important;
+                box-sizing: border-box !important;
+                margin: 0 !important;
+            }
+
+            .btn-primary,
+            .btn-save-list {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 5px 0 !important;
+                padding: 18px !important;
+                font-size: 1.1rem !important;
+                border-radius: 15px !important;
+                flex: none !important;
+                box-sizing: border-box !important;
+                display: block !important;
+            }
+
+            /* ANULAMOS CUALQUIER ESTILO DE BOOTSTRAP QUE INTERFIERA */
+            .input-group-custom .form-control,
+            .input-group-custom .btn {
+                flex: none !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+            }
+
+            /* FUERZA EL FLEX EN EL CONTENEDOR PADRE */
+            .notebook {
+                display: block !important;
+            }
+
+            .list-group-item {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                padding: 15px !important;
+                gap: 10px !important;
+                width: 100% !important;
+            }
+
+            .item-info {
+                margin-left: 0 !important;
+                width: 100% !important;
+                font-size: 1.4rem;
+                margin-bottom: 10px !important;
+            }
+
+            .price-input {
+                width: 70px !important;
+                margin-left: 0 !important;
+                margin-top: 5px !important;
+                flex-shrink: 0 !important;
+            }
+
+            .btn-danger {
+                align-self: flex-end !important;
+                padding: 10px 15px !important;
+                width: auto !important;
+            }
+
             .btn-group {
-                flex-direction: column;
-                gap: 10px;
+                flex-direction: column !important;
+                gap: 10px !important;
+                width: 100% !important;
             }
-            
-            .btn-warning, .btn-success {
-                width: 100%;
-                padding: 15px;
-                font-size: 1.1rem;
+
+            .btn-warning,
+            .btn-success {
+                width: 100% !important;
+                padding: 15px !important;
+                font-size: 1.1rem !important;
+                box-sizing: border-box !important;
             }
-            
+
             .total-price {
                 font-size: 1.5rem;
                 padding: 12px;
+                width: 100% !important;
             }
         }
-        
+
         @media (max-width: 480px) {
-            .header h1 { font-size: 1.8rem; }
-            .form-control.main-item { font-size: 1.2rem; }
-            .item-info { font-size: 1.2rem; }
-            .price-input { width: 60px; }
-        }
-        
-        /* Estilos para modales en móvil */
-        @media (max-width: 576px) {
-            .modal-dialog {
-                margin: 10px;
+            .header h1 {
+                font-size: 1.8rem;
             }
-            
-            .modal-content {
-                border-radius: 10px;
+
+            .form-control.main-item {
+                font-size: 1.2rem;
+                padding: 16px 18px !important;
+            }
+
+            .item-info {
+                font-size: 1.2rem;
+            }
+
+            .price-input {
+                width: 60px !important;
+            }
+
+            .btn-primary,
+            .btn-save-list {
+                padding: 16px !important;
+                font-size: 1rem !important;
+            }
+        }
+
+        /* ESTILO BASE MEJORADO PARA EVITAR CONFLICTOS */
+        .input-group-custom {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            align-items: stretch !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 25px !important;
+            padding: 5px !important;
+            margin-bottom: 20px !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+            gap: 5px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        .input-group-custom>* {
+            box-sizing: border-box !important;
+        }
+
+        /* DESACTIVAR ESTILOS DE BOOTSTRAP EN MÓVIL */
+        @media (max-width: 768px) {
+            .input-group-custom {
+                display: block !important;
+            }
+
+            .input-group-custom>* {
+                display: block !important;
+                width: 100% !important;
+                margin-bottom: 8px !important;
+            }
+
+            .input-group-custom>*:last-child {
+                margin-bottom: 0 !important;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <h1>📝 Lista de la Compra</h1>
         </div>
-        
+
         <div class="tabs-container">
             <ul class="nav nav-tabs" id="listTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="current-tab" data-bs-toggle="tab" href="#currentList" role="tab">📋 Lista Actual</a>
+                    <a class="nav-link active" id="current-tab" data-bs-toggle="tab" href="#currentList" role="tab">📋
+                        Lista Actual</a>
                 </li>
             </ul>
         </div>
-        
+
         <div class="tab-content">
             <div class="tab-pane fade show active" id="currentList" role="tabpanel">
                 <div class="notebook">
                     <!-- CAMBIO: Usar div personalizado en lugar de input-group de Bootstrap -->
-                    <div class="input-group-custom">
-                        <input type="number" id="itemQuantity" class="form-control quantity" placeholder="📦 Cantidad" min="1" value="1">
-                        <input type="text" id="newItem" class="form-control main-item" placeholder="Escribe aquí tu artículo... ✏️">
-                        <button class="btn btn-primary" id="addButton">➕ Añadir</button>
-                        <button class="btn btn-save-list" id="saveListButton">💾 Guardar</button>
+                    <div class="input-group-custom" style="display: flex; flex-direction: row;">
+                        <input type="number" id="itemQuantity" class="form-control quantity" placeholder="📦 Cantidad"
+                            min="1" value="1" style="flex: 0 0 auto;">
+                        <input type="text" id="newItem" class="form-control main-item"
+                            placeholder="Escribe aquí tu artículo... ✏️" style="flex: 1;">
+                        <button class="btn btn-primary" id="addButton" style="flex: 0 0 auto;">➕ Añadir</button>
+                        <button class="btn btn-save-list" id="saveListButton" style="flex: 0 0 auto;">💾
+                            Guardar</button>
                     </div>
-                    
                     <ul class="list-group" id="shoppingList"></ul>
-                    
+
                     <div id="totalContainer" class="total-price" style="display: none;">
                         💰 Gastado: <span id="totalAmount">0.00</span> €
                     </div>
-                    
+
                     <div class="btn-group mt-3">
                         <button class="btn btn-warning" id="resetButton">🗑️ Resetear Todo</button>
                         <button class="btn btn-success" id="exportButton">📄 Exportar TXT</button>
@@ -490,10 +591,11 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Resto del HTML igual... -->
         <div class="saved-lists">
-            <h4 style="text-align: center; margin-bottom: 20px; font-family: 'Reenie Beanie', cursive;">📚 Listas Guardadas</h4>
+            <h4 style="text-align: center; margin-bottom: 20px; font-family: 'Reenie Beanie', cursive;">📚 Listas
+                Guardadas</h4>
             <div id="savedListsContainer"></div>
         </div>
     </div>
@@ -502,11 +604,12 @@
     <!-- ... todos los modales permanecen igual ... -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- JavaScript igual que antes -->
     <script>
         // ... todo el JavaScript permanece exactamente igual ...
         // Solo asegúrate de que el HTML del input-group-custom coincida con los IDs
     </script>
 </body>
+
 </html>
