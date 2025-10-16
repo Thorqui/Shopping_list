@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de la Compra</title>
-    <!-- Bootstrap CSS -->
+    <title>Lista de la Compra 📝</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts - Fuente manuscrita -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Reenie+Beanie&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -56,9 +53,9 @@
             border: none;
             color: white;
             font-family: 'Caveat', cursive;
-            font-size: 1.2rem;
-            padding: 10px 25px;
+            font-size: 1.5rem;
             border-radius: 20px;
+            padding: 10px 25px;
             margin: 0 5px;
             transition: all 0.3s ease;
         }
@@ -89,10 +86,11 @@
         .notebook::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 20px;
             background: linear-gradient(90deg, #654321 0%, #8B4513 50%, #654321 100%);
             border-radius: 15px 15px 0 0;
         }
@@ -100,9 +98,8 @@
         .notebook::after {
             content: '📝';
             position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: -25px;
+            right: 20px;
             font-size: 2rem;
             background: #8B4513;
             border-radius: 50%;
@@ -110,7 +107,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Input group mejorado para móvil */
         .input-group-custom {
             display: flex;
             background: rgba(255, 255, 255, 0.9);
@@ -125,8 +121,7 @@
         .form-control {
             border: none;
             background: transparent;
-            font-family: 'Caveat', cursive;
-            color: #333;
+            box-shadow: none !important;
             padding: 15px 20px;
             flex: 1;
         }
@@ -149,13 +144,12 @@
             color: #999;
             font-family: 'Caveat', cursive;
         }
-
+        
         .btn-primary,
         .btn-save-list {
             font-family: 'Caveat', cursive;
             font-size: 1.2rem;
             padding: 15px 20px;
-            background: linear-gradient(45deg, #4CAF50, #45a049);
             border: none;
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
             border-radius: 20px;
@@ -163,19 +157,22 @@
             flex-shrink: 0;
         }
 
+        .btn-primary {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+        }
+
         .btn-save-list {
             background: linear-gradient(45deg, #2196F3, #1976D2);
             padding: 15px 15px;
             font-size: 1rem;
         }
-
+        
         .btn-primary:hover,
         .btn-save-list:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Resto de estilos igual... */
         .list-group-item {
             background: rgba(255, 255, 255, 0.8);
             border: none;
@@ -197,39 +194,48 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .item-info {
+        .item-details {
+            display: flex;
+            align-items: center;
             flex-grow: 1;
-            margin-left: 15px;
+            gap: 15px;
+        }
+
+        .item-info {
             font-weight: 700;
             font-size: 1.6rem;
-            min-width: 0;
+            min-width: 0; /* Prevents text overflow issues */
+            cursor: pointer;
         }
 
         .item-quantity {
             background: #e8f5e8;
             border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            display: inline-flex;
+            color: #388E3C;
+            width: 40px;
+            height: 40px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: #2e7d32;
-            margin-right: 10px;
+            font-weight: 700;
             font-size: 1.1rem;
             flex-shrink: 0;
+        }
+
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .price-input {
             border: 2px solid #4CAF50;
             border-radius: 10px;
             padding: 5px 10px;
+            width: 90px;
+            text-align: right;
             font-family: 'Caveat', cursive;
             font-size: 1.2rem;
-            background: rgba(76, 175, 80, 0.1);
-            width: 80px;
-            text-align: center;
-            margin-left: 10px;
             flex-shrink: 0;
         }
 
@@ -242,9 +248,8 @@
         .total-price {
             background: linear-gradient(45deg, #4CAF50, #45a049);
             color: white;
-            border-radius: 15px;
             padding: 15px;
-            font-family: 'Reenie Beanie', cursive;
+            border-radius: 15px;
             font-size: 2rem;
             text-align: center;
             margin-top: 20px;
@@ -255,11 +260,11 @@
             font-family: 'Caveat', cursive;
             padding: 8px 15px;
             border-radius: 15px;
-            background: linear-gradient(45deg, #f44336, #d32f2f);
+            font-size: 1rem;
             border: none;
             flex-shrink: 0;
         }
-
+        
         .btn-warning,
         .btn-success {
             font-family: 'Caveat', cursive;
@@ -281,7 +286,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .struck {
+        .struck .item-info {
             text-decoration: line-through;
             color: #999;
             opacity: 0.7;
@@ -343,7 +348,7 @@
             border-radius: 10px;
             margin: 0 2px;
         }
-
+        
         .btn-load {
             background: linear-gradient(45deg, #4CAF50, #45a049);
             color: white;
@@ -355,200 +360,49 @@
             color: white;
             border: none;
         }
-
+        
+        /* --- Media Queries for Responsive Design --- */
         @media (max-width: 768px) {
-            .container {
-                max-width: 100%;
-                padding: 10px 15px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .notebook {
-                padding: 20px 15px;
-                border-width: 10px;
-            }
-
-            /* Input group MOBIL - Layout vertical optimizado */
-            /* INPUT GROUP MOBIL - FUERZA EL 100% DE ANCHO */
+            .header h1 { font-size: 2.5rem; }
+            .notebook { padding: 20px 15px; border-width: 10px; }
+            
             .input-group-custom {
-                flex-direction: column !important;
-                gap: 8px !important;
-                padding: 10px !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
+                flex-direction: column;
+                gap: 8px;
+                padding: 10px;
+                background: transparent;
+                box-shadow: none;
             }
 
-            .input-group-custom>* {
-                width: 100% !important;
-                max-width: 100% !important;
-                flex: none !important;
-                margin: 0 !important;
-                display: block !important;
+            .input-group-custom > * { width: 100%; max-width: none; }
+            
+            .form-control.quantity, .form-control.main-item {
+                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.9);
+                text-align: left;
+                padding: 18px 20px;
+                border: none;
             }
 
-            .form-control.quantity {
-                width: 100% !important;
-                max-width: none !important;
-                border: none !important;
-                border-radius: 15px !important;
-                background: rgba(255, 255, 255, 0.9) !important;
-                border-right: none !important;
-                flex: none !important;
-                box-sizing: border-box !important;
-            }
+            .form-control.main-item { font-size: 1.3rem; }
+            
+            .btn-primary, .btn-save-list { padding: 18px; font-size: 1.1rem; border-radius: 15px; }
 
-            .form-control.main-item {
-                width: 100% !important;
-                flex: none !important;
-                border-left: none !important;
-                border-radius: 15px !important;
-                background: rgba(255, 255, 255, 0.9) !important;
-                font-size: 1.3rem;
-                padding: 18px 20px !important;
-                box-sizing: border-box !important;
-                margin: 0 !important;
-            }
+            .list-group-item { flex-direction: column; align-items: stretch; gap: 12px; }
+            .item-info { font-size: 1.4rem; }
+            .item-actions { justify-content: space-between; }
+            .price-input { width: 100px; margin-left: 0; }
+            .btn-danger { align-self: center; }
 
-            .btn-primary,
-            .btn-save-list {
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 5px 0 !important;
-                padding: 18px !important;
-                font-size: 1.1rem !important;
-                border-radius: 15px !important;
-                flex: none !important;
-                box-sizing: border-box !important;
-                display: block !important;
-            }
-
-            /* ANULAMOS CUALQUIER ESTILO DE BOOTSTRAP QUE INTERFIERA */
-            .input-group-custom .form-control,
-            .input-group-custom .btn {
-                flex: none !important;
-                min-width: 0 !important;
-                max-width: 100% !important;
-            }
-
-            /* FUERZA EL FLEX EN EL CONTENEDOR PADRE */
-            .notebook {
-                display: block !important;
-            }
-
-            .list-group-item {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                padding: 15px !important;
-                gap: 10px !important;
-                width: 100% !important;
-            }
-
-            .item-info {
-                margin-left: 0 !important;
-                width: 100% !important;
-                font-size: 1.4rem;
-                margin-bottom: 10px !important;
-            }
-
-            .price-input {
-                width: 70px !important;
-                margin-left: 0 !important;
-                margin-top: 5px !important;
-                flex-shrink: 0 !important;
-            }
-
-            .btn-danger {
-                align-self: flex-end !important;
-                padding: 10px 15px !important;
-                width: auto !important;
-            }
-
-            .btn-group {
-                flex-direction: column !important;
-                gap: 10px !important;
-                width: 100% !important;
-            }
-
-            .btn-warning,
-            .btn-success {
-                width: 100% !important;
-                padding: 15px !important;
-                font-size: 1.1rem !important;
-                box-sizing: border-box !important;
-            }
-
-            .total-price {
-                font-size: 1.5rem;
-                padding: 12px;
-                width: 100% !important;
-            }
+            .btn-group { flex-direction: column; gap: 10px; width: 100%; }
+            .btn-warning, .btn-success { width: 100%; padding: 15px; font-size: 1.1rem; }
+            .total-price { font-size: 1.5rem; padding: 12px; }
         }
-
+        
         @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .form-control.main-item {
-                font-size: 1.2rem;
-                padding: 16px 18px !important;
-            }
-
-            .item-info {
-                font-size: 1.2rem;
-            }
-
-            .price-input {
-                width: 60px !important;
-            }
-
-            .btn-primary,
-            .btn-save-list {
-                padding: 16px !important;
-                font-size: 1rem !important;
-            }
-        }
-
-        /* ESTILO BASE MEJORADO PARA EVITAR CONFLICTOS */
-        .input-group-custom {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            align-items: stretch !important;
-            background: rgba(255, 255, 255, 0.9) !important;
-            border-radius: 25px !important;
-            padding: 5px !important;
-            margin-bottom: 20px !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-            gap: 5px !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
-        }
-
-        .input-group-custom>* {
-            box-sizing: border-box !important;
-        }
-
-        /* DESACTIVAR ESTILOS DE BOOTSTRAP EN MÓVIL */
-        @media (max-width: 768px) {
-            .input-group-custom {
-                display: block !important;
-            }
-
-            .input-group-custom>* {
-                display: block !important;
-                width: 100% !important;
-                margin-bottom: 8px !important;
-            }
-
-            .input-group-custom>*:last-child {
-                margin-bottom: 0 !important;
-            }
-            .btn-group mt-3>*:last-child {
-                margin-bottom: 0 !important;
-            }
+            .header h1 { font-size: 2rem; }
+            .form-control.main-item { font-size: 1.2rem; }
+            .item-info { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -562,8 +416,7 @@
         <div class="tabs-container">
             <ul class="nav nav-tabs" id="listTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="current-tab" data-bs-toggle="tab" href="#currentList" role="tab">📋
-                        Lista Actual</a>
+                    <a class="nav-link active" id="current-tab" data-bs-toggle="tab" href="#currentList" role="tab">📋 Lista Actual</a>
                 </li>
             </ul>
         </div>
@@ -571,111 +424,300 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="currentList" role="tabpanel">
                 <div class="notebook">
-                    <!-- CAMBIO: Usar div personalizado en lugar de input-group de Bootstrap -->
-                    <div class="input-group-custom" style="display: flex; flex-direction: row;">
-                        <input type="number" id="itemQuantity" class="form-control quantity" placeholder="📦 Cantidad"
-                            min="1" value="1" style="flex: 0 0 auto;">
-                        <input type="text" id="newItem" class="form-control main-item"
-                            placeholder="Escribe aquí tu artículo... ✏️" style="flex: 1;">
-                        <button class="btn btn-primary" id="addButton" style="flex: 0 0 auto;">➕ Añadir</button>
-                        <button class="btn btn-save-list" id="saveListButton" style="flex: 0 0 auto;">💾
-                            Guardar</button>
+                    <div class="input-group-custom">
+                        <input type="number" id="itemQuantity" class="form-control quantity" placeholder="📦 Cant." min="1" value="1">
+                        <input type="text" id="newItem" class="form-control main-item" placeholder="Escribe aquí tu artículo... ✏️">
+                        <button class="btn btn-primary" id="addButton">➕ Añadir</button>
+                        <button class="btn btn-save-list" id="saveListButton">💾 Guardar Lista</button>
                     </div>
+
                     <ul class="list-group" id="shoppingList"></ul>
 
                     <div id="totalContainer" class="total-price" style="display: none;">
                         💰 Gastado: <span id="totalAmount">0.00</span> €
                     </div>
 
-                    <div class="btn-group mt-3">
-                        <button class="btn btn-warning" id="resetButton">🗑️ Resetear Todo</button>
-                        <button class="btn btn-success" id="exportButton">📄 Exportar TXT</button>
+                    <div class="d-flex gap-2 mt-3" id="actionButtons">
+                        <button class="btn btn-warning w-100" id="resetButton">🗑️ Resetear</button>
+                        <button class="btn btn-success w-100" id="exportButton">📄 Exportar TXT</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Resto del HTML igual... -->
         <div class="saved-lists">
-            <h4 style="text-align: center; margin-bottom: 20px; font-family: 'Reenie Beanie', cursive;">📚 Listas
-                Guardadas</h4>
+            <h4 style="text-align: center; margin-bottom: 20px; font-family: 'Reenie Beanie', cursive;">📚 Listas Guardadas</h4>
             <div id="savedListsContainer"></div>
         </div>
     </div>
-
-    <!-- Modales (igual que antes) -->
-    <!-- ... todos los modales permanecen igual ... -->
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript igual que antes -->
     <script>
-      // Obtener elementos
-const addButton = document.getElementById('addButton');
-const saveListButton = document.getElementById('saveListButton');
-const shoppingList = document.getElementById('shoppingList');
-const newItemInput = document.getElementById('newItem');
-const itemQuantity = document.getElementById('itemQuantity');
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- ELEMENTOS DEL DOM ---
+            const newItemInput = document.getElementById('newItem');
+            const itemQuantityInput = document.getElementById('itemQuantity');
+            const addButton = document.getElementById('addButton');
+            const saveListButton = document.getElementById('saveListButton');
+            const resetButton = document.getElementById('resetButton');
+            const exportButton = document.getElementById('exportButton');
+            const shoppingListUL = document.getElementById('shoppingList');
+            const totalContainer = document.getElementById('totalContainer');
+            const totalAmountSpan = document.getElementById('totalAmount');
+            const savedListsContainer = document.getElementById('savedListsContainer');
 
-// Función para actualizar localStorage
-function guardarLista() {
-    const items = [];
-    shoppingList.querySelectorAll('li').forEach(li => {
-        const texto = li.querySelector('.item-info').innerText;
-        const cantidad = li.querySelector('.item-quantity').innerText;
-        items.push({ texto, cantidad });
-    });
-    localStorage.setItem('shoppingList', JSON.stringify(items));
-    alert('✅ Lista guardada en el navegador');
-}
+            // --- ESTADO DE LA APLICACIÓN ---
+            let currentList = [];
 
-// Cargar lista al inicio
-function cargarLista() {
-    const items = JSON.parse(localStorage.getItem('shoppingList') || '[]');
-    items.forEach(item => {
-        agregarItemLista(item.texto, item.cantidad);
-    });
-}
+            // --- FUNCIONES DE PERSISTENCIA (LocalStorage) ---
 
-// Función para agregar item al DOM
-function agregarItemLista(texto, cantidad) {
-    const li = document.createElement('li');
-    li.className = 'list-group-item';
+            // Guarda la lista actual en el navegador
+            const saveCurrentListToStorage = () => {
+                localStorage.setItem('currentShoppingList', JSON.stringify(currentList));
+            };
 
-    li.innerHTML = `
-        <span class="item-quantity">${cantidad}</span>
-        <span class="item-info">${texto}</span>
-        <button class="btn btn-danger btn-sm remove-item">❌</button>
-    `;
+            // Carga la lista actual desde el navegador
+            const loadCurrentListFromStorage = () => {
+                const storedList = localStorage.getItem('currentShoppingList');
+                return storedList ? JSON.parse(storedList) : [];
+            };
 
-    // Botón eliminar
-    li.querySelector('.remove-item').addEventListener('click', () => {
-        li.remove();
-        guardarLista();
-    });
+            // Obtiene todas las listas guardadas
+            const getSavedLists = () => {
+                const saved = localStorage.getItem('savedShoppingLists');
+                return saved ? JSON.parse(saved) : {};
+            };
 
-    shoppingList.appendChild(li);
-}
+            // Guarda una lista con un nombre específico
+            const saveNamedList = (name, list) => {
+                const savedLists = getSavedLists();
+                savedLists[name] = list;
+                localStorage.setItem('savedShoppingLists', JSON.stringify(savedLists));
+            };
 
-// Añadir botón "Añadir"
-addButton.addEventListener('click', () => {
-    const texto = newItemInput.value.trim();
-    const cantidad = itemQuantity.value || 1;
-    if (texto === '') return;
-    agregarItemLista(texto, cantidad);
-    newItemInput.value = '';
-    itemQuantity.value = 1;
-    guardarLista();
-});
+            // Borra una lista guardada
+            const deleteNamedList = (name) => {
+                const savedLists = getSavedLists();
+                delete savedLists[name];
+                localStorage.setItem('savedShoppingLists', JSON.stringify(savedLists));
+            };
 
-// Botón guardar explícito
-saveListButton.addEventListener('click', () => {
-    guardarLista();
-});
+            // --- FUNCIONES DE RENDERIZADO Y LÓGICA ---
 
-// Cargar lista al iniciar la página
-cargarLista();
+            // Calcula y muestra el total gastado
+            const updateTotal = () => {
+                const total = currentList.reduce((sum, item) => {
+                    return item.bought && item.price ? sum + (item.price * item.quantity) : sum;
+                }, 0);
 
+                totalAmountSpan.textContent = total.toFixed(2);
+                totalContainer.style.display = currentList.length > 0 ? 'block' : 'none';
+            };
+
+            // Renderiza la lista completa de artículos en el DOM
+            const renderList = () => {
+                shoppingListUL.innerHTML = ''; // Limpiar la lista antes de renderizar
+
+                if (currentList.length === 0) {
+                    updateTotal();
+                    return;
+                }
+
+                currentList.forEach((item, index) => {
+                    const li = document.createElement('li');
+                    li.className = `list-group-item ${item.bought ? 'struck' : ''}`;
+                    li.dataset.index = index;
+
+                    li.innerHTML = `
+                        <div class="item-details">
+                            <span class="item-quantity">${item.quantity}</span>
+                            <span class="item-info">${item.text}</span>
+                        </div>
+                        <div class="item-actions">
+                            <input type="number" class="price-input" placeholder="0.00 €" value="${item.price || ''}" min="0" step="0.01">
+                            <button class="btn btn-danger btn-sm remove-item">❌</button>
+                        </div>
+                    `;
+
+                    shoppingListUL.appendChild(li);
+                });
+
+                updateTotal();
+            };
+
+            // Renderiza las tarjetas de las listas guardadas
+            const renderSavedLists = () => {
+                savedListsContainer.innerHTML = '';
+                const savedLists = getSavedLists();
+                const names = Object.keys(savedLists);
+
+                if (names.length === 0) {
+                    savedListsContainer.innerHTML = '<p class="text-center text-muted">Aún no tienes listas guardadas.</p>';
+                    return;
+                }
+
+                names.forEach(name => {
+                    const list = savedLists[name];
+                    const itemCount = list.length;
+                    const totalValue = list.reduce((sum, item) => sum + (item.price || 0) * item.quantity, 0).toFixed(2);
+
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = 'list-thumbnail';
+                    thumbnail.innerHTML = `
+                        <h6>${name}</h6>
+                        <div class="list-summary">
+                            <span>${itemCount} artículo(s)</span>
+                            <span>Total Aprox: ${totalValue} €</span>
+                        </div>
+                        <div class="mt-2 text-end">
+                            <button class="btn btn-load btn-sm btn-list-action" data-name="${name}">📂 Cargar</button>
+                            <button class="btn btn-delete-list btn-sm btn-list-action" data-name="${name}">🗑️ Borrar</button>
+                        </div>
+                    `;
+                    savedListsContainer.appendChild(thumbnail);
+                });
+            };
+
+            // --- MANEJADORES DE EVENTOS ---
+
+            // Añadir un nuevo artículo
+            const handleAddItem = () => {
+                const text = newItemInput.value.trim();
+                const quantity = parseInt(itemQuantityInput.value) || 1;
+                if (!text) {
+                    alert('Por favor, escribe el nombre del artículo.');
+                    return;
+                }
+
+                currentList.push({ id: Date.now(), text, quantity, price: null, bought: false });
+                newItemInput.value = '';
+                itemQuantityInput.value = 1;
+                newItemInput.focus();
+                
+                saveCurrentListToStorage();
+                renderList();
+            };
+
+            // Click en la lista (tachar, borrar, cambiar precio)
+            shoppingListUL.addEventListener('click', (e) => {
+                const target = e.target;
+                const li = target.closest('li');
+                if (!li) return;
+
+                const index = parseInt(li.dataset.index);
+
+                // Borrar artículo
+                if (target.classList.contains('remove-item')) {
+                    currentList.splice(index, 1);
+                }
+                // Tachar artículo
+                else if (target.classList.contains('item-info') || target.classList.contains('item-quantity')) {
+                    currentList[index].bought = !currentList[index].bought;
+                }
+                
+                saveCurrentListToStorage();
+                renderList();
+            });
+
+            // Actualizar precio
+            shoppingListUL.addEventListener('change', (e) => {
+                const target = e.target;
+                if (target.classList.contains('price-input')) {
+                    const li = target.closest('li');
+                    const index = parseInt(li.dataset.index);
+                    const price = parseFloat(target.value);
+                    currentList[index].price = isNaN(price) ? null : price;
+                    saveCurrentListToStorage();
+                    updateTotal();
+                }
+            });
+            
+            // Añadir con botón o tecla Enter
+            addButton.addEventListener('click', handleAddItem);
+            newItemInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleAddItem();
+            });
+
+            // Guardar lista con nombre
+            saveListButton.addEventListener('click', () => {
+                if (currentList.length === 0) {
+                    alert('La lista está vacía, no se puede guardar.');
+                    return;
+                }
+                const name = prompt('Dale un nombre a tu lista:', `Mi Lista - ${new Date().toLocaleDateString()}`);
+                if (name && name.trim()) {
+                    saveNamedList(name.trim(), currentList);
+                    renderSavedLists();
+                    alert(`✅ Lista "${name.trim()}" guardada.`);
+                }
+            });
+
+            // Cargar o borrar listas guardadas
+            savedListsContainer.addEventListener('click', (e) => {
+                const name = e.target.dataset.name;
+                if (!name) return;
+
+                if (e.target.classList.contains('btn-load')) {
+                    if (confirm(`¿Quieres cargar la lista "${name}"? La lista actual se reemplazará.`)) {
+                        const savedLists = getSavedLists();
+                        currentList = savedLists[name];
+                        saveCurrentListToStorage();
+                        renderList();
+                        window.scrollTo(0, 0);
+                    }
+                } else if (e.target.classList.contains('btn-delete-list')) {
+                    if (confirm(`¿Estás seguro de que quieres borrar la lista "${name}"?`)) {
+                        deleteNamedList(name);
+                        renderSavedLists();
+                    }
+                }
+            });
+
+            // Resetear la lista actual
+            resetButton.addEventListener('click', () => {
+                if (confirm('¿Seguro que quieres borrar todos los artículos de la lista actual?')) {
+                    currentList = [];
+                    saveCurrentListToStorage();
+                    renderList();
+                }
+            });
+
+            // Exportar a TXT
+            exportButton.addEventListener('click', () => {
+                if (currentList.length === 0) {
+                    alert('No hay nada que exportar.');
+                    return;
+                }
+                
+                let content = '--- MI LISTA DE LA COMPRA ---\n\n';
+                currentList.forEach(item => {
+                    const status = item.bought ? '[x]' : '[ ]';
+                    const price = item.price ? `${(item.price * item.quantity).toFixed(2)} €` : '';
+                    content += `${status} ${item.text} (x${item.quantity}) - ${price}\n`;
+                });
+
+                const total = parseFloat(totalAmountSpan.textContent).toFixed(2);
+                content += `\n-----------------------------\nTOTAL GASTADO: ${total} €`;
+
+                const blob = new Blob([content], { type: 'text/plain' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'lista_compra.txt';
+                a.click();
+                URL.revokeObjectURL(a.href);
+            });
+
+
+            // --- INICIALIZACIÓN ---
+            const init = () => {
+                currentList = loadCurrentListFromStorage();
+                renderList();
+                renderSavedLists();
+            };
+
+            init();
+        });
     </script>
 </body>
 
