@@ -120,7 +120,7 @@
 
         .form-control {
             border: none;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.95); /* Fondo más opaco */
             box-shadow: none !important;
             padding: 15px 20px;
             flex: 1;
@@ -173,6 +173,14 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
 
+        .add-icon {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+        .btn-primary:hover .add-icon {
+            transform: scale(1.2) rotate(90deg);
+        }
+
         .list-group-item {
             background: rgba(255, 255, 255, 0.8);
             border: none;
@@ -187,6 +195,12 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 10px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .list-group-item:hover {
@@ -204,7 +218,7 @@
         .item-info {
             font-weight: 700;
             font-size: 1.6rem;
-            min-width: 0; /* Prevents text overflow issues */
+            min-width: 0;
             cursor: pointer;
         }
 
@@ -304,11 +318,21 @@
         }
 
         .saved-lists {
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
             border-radius: 15px;
             padding: 20px;
             margin-top: 20px;
             border: 3px solid #8B4513;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .saved-lists .text-center.text-muted {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: #666;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
         }
 
         .list-thumbnail {
@@ -360,12 +384,86 @@
             color: white;
             border: none;
         }
-        
-        /* --- Media Queries for Responsive Design --- */
+
+        /* Estilos para mensajes personalizados */
+        .message-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .message-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .message-box {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .message-box p {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .message-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .message-button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .message-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .message-button.confirm {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .message-button.cancel {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        /* Media Queries para diseño responsive */
         @media (max-width: 768px) {
-            .header h1 { font-size: 2.5rem; }
+            .header h1 { font-size: 2rem; }
             .notebook { padding: 20px 15px; border-width: 10px; }
-            
             .input-group-custom {
                 flex-direction: column;
                 gap: 8px;
@@ -373,9 +471,7 @@
                 background: transparent;
                 box-shadow: none;
             }
-
             .input-group-custom > * { width: 100%; max-width: none; }
-            
             .form-control.quantity, .form-control.main-item {
                 border-radius: 15px;
                 background: rgba(255, 255, 255, 0.9);
@@ -383,22 +479,19 @@
                 padding: 18px 20px;
                 border: none;
             }
-
-            .form-control.main-item { font-size: 1.3rem; }
-            
+            .form-control.main-item { font-size: 1.2rem; }
             .btn-primary, .btn-save-list { padding: 18px; font-size: 1.1rem; border-radius: 15px; }
-
             .list-group-item { flex-direction: column; align-items: stretch; gap: 12px; }
-            .item-info { font-size: 1.4rem; }
+            .item-info { font-size: 1.3rem; }
             .item-actions { justify-content: space-between; }
             .price-input { width: 100px; margin-left: 0; }
             .btn-danger { align-self: center; }
-
             .btn-group { flex-direction: column; gap: 10px; width: 100%; }
             .btn-warning, .btn-success { width: 100%; padding: 15px; font-size: 1.1rem; }
             .total-price { font-size: 1.5rem; padding: 12px; }
+            .list-thumbnail h6 { font-size: 1.3rem; }
         }
-        
+
         @media (max-width: 480px) {
             .header h1 { font-size: 2rem; }
             .form-control.main-item { font-size: 1.2rem; }
@@ -416,7 +509,7 @@
         <div class="tabs-container">
             <ul class="nav nav-tabs" id="listTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="current-tab" data-bs-toggle="tab" href="#currentList" role="tab">📋 Lista Actual</a>
+                    <a class="nav-link active" id="current-tab" data-bs-toggle="tab" href="#currentList" role="tab" aria-label="Ver lista actual">📋 Lista Actual</a>
                 </li>
             </ul>
         </div>
@@ -425,9 +518,9 @@
             <div class="tab-pane fade show active" id="currentList" role="tabpanel">
                 <div class="notebook">
                     <div class="input-group-custom">
-                        <input type="number" id="itemQuantity" class="form-control quantity" placeholder="📦 Cant." min="1" value="1">
-                        <input type="text" id="newItem" class="form-control main-item" placeholder="Escribe aquí tu artículo... ✏️">
-                        <button class="btn btn-primary" id="addButton">➕ Añadir</button>
+                        <input type="number" id="itemQuantity" class="form-control quantity" placeholder="📦 Cant." min="1" value="1" aria-label="Cantidad del artículo">
+                        <input type="text" id="newItem" class="form-control main-item" placeholder="Escribe aquí tu artículo... ✏️" aria-label="Nombre del artículo">
+                        <button class="btn btn-primary" id="addButton"><span class="add-icon">➕</span> Añadir</button>
                         <button class="btn btn-save-list" id="saveListButton">💾 Guardar Lista</button>
                     </div>
 
@@ -438,8 +531,8 @@
                     </div>
 
                     <div class="d-flex gap-2 mt-3" id="actionButtons">
-                        <button class="btn btn-warning w-100" id="resetButton">🗑️ Resetear</button>
-                        <button class="btn btn-success w-100" id="exportButton">📄 Exportar TXT</button>
+                        <button class="btn btn-warning w-100" id="resetButton" aria-label="Resetear lista">🗑️ Resetear</button>
+                        <button class="btn btn-success w-100" id="exportButton" aria-label="Exportar lista a TXT">📄 Exportar TXT</button>
                     </div>
                 </div>
             </div>
@@ -448,6 +541,14 @@
         <div class="saved-lists">
             <h4 style="text-align: center; margin-bottom: 20px; font-family: 'Reenie Beanie', cursive;">📚 Listas Guardadas</h4>
             <div id="savedListsContainer"></div>
+        </div>
+
+        <!-- Contenedor para mensajes personalizados -->
+        <div class="message-overlay" id="messageOverlay">
+            <div class="message-box">
+                <p id="messageText"></p>
+                <div class="message-buttons" id="messageButtons"></div>
+            </div>
         </div>
     </div>
     
@@ -466,37 +567,84 @@
             const totalContainer = document.getElementById('totalContainer');
             const totalAmountSpan = document.getElementById('totalAmount');
             const savedListsContainer = document.getElementById('savedListsContainer');
+            const messageOverlay = document.getElementById('messageOverlay');
+            const messageText = document.getElementById('messageText');
+            const messageButtons = document.getElementById('messageButtons');
 
             // --- ESTADO DE LA APLICACIÓN ---
             let currentList = [];
 
-            // --- FUNCIONES DE PERSISTENCIA (LocalStorage) ---
+            // --- FUNCIONES DE MENSAJES PERSONALIZADOS ---
+            const showMessage = (text, isConfirm = false, onConfirm = null) => {
+                messageText.textContent = text;
+                messageButtons.innerHTML = '';
 
-            // Guarda la lista actual en el navegador
+                if (isConfirm) {
+                    const confirmBtn = document.createElement('button');
+                    confirmBtn.className = 'message-button confirm';
+                    confirmBtn.textContent = 'Aceptar';
+                    confirmBtn.onclick = () => {
+                        messageOverlay.classList.remove('show');
+                        if (onConfirm) onConfirm(true);
+                    };
+
+                    const cancelBtn = document.createElement('button');
+                    cancelBtn.className = 'message-button cancel';
+                    cancelBtn.textContent = 'Cancelar';
+                    cancelBtn.onclick = () => {
+                        messageOverlay.classList.remove('show');
+                        if (onConfirm) onConfirm(false);
+                    };
+
+                    messageButtons.appendChild(confirmBtn);
+                    messageButtons.appendChild(cancelBtn);
+                } else {
+                    const okBtn = document.createElement('button');
+                    okBtn.className = 'message-button confirm';
+                    okBtn.textContent = 'OK';
+                    okBtn.onclick = () => messageOverlay.classList.remove('show');
+                    messageButtons.appendChild(okBtn);
+                }
+
+                messageOverlay.classList.add('show');
+                messageButtons.children[0].focus();
+
+                // Manejo de teclas Enter y Esc
+                const handleKey = (e) => {
+                    if (e.key === 'Enter' && !isConfirm) {
+                        messageOverlay.classList.remove('show');
+                    } else if (e.key === 'Enter' && isConfirm) {
+                        messageOverlay.classList.remove('show');
+                        if (onConfirm) onConfirm(true);
+                    } else if (e.key === 'Escape') {
+                        messageOverlay.classList.remove('show');
+                        if (isConfirm && onConfirm) onConfirm(false);
+                    }
+                };
+                document.addEventListener('keydown', handleKey, { once: true });
+            };
+
+            // --- FUNCIONES DE PERSISTENCIA (LocalStorage) ---
             const saveCurrentListToStorage = () => {
                 localStorage.setItem('currentShoppingList', JSON.stringify(currentList));
             };
 
-            // Carga la lista actual desde el navegador
             const loadCurrentListFromStorage = () => {
                 const storedList = localStorage.getItem('currentShoppingList');
                 return storedList ? JSON.parse(storedList) : [];
             };
 
-            // Obtiene todas las listas guardadas
             const getSavedLists = () => {
                 const saved = localStorage.getItem('savedShoppingLists');
                 return saved ? JSON.parse(saved) : {};
             };
 
-            // Guarda una lista con un nombre específico
             const saveNamedList = (name, list) => {
                 const savedLists = getSavedLists();
                 savedLists[name] = list;
                 localStorage.setItem('savedShoppingLists', JSON.stringify(savedLists));
             };
 
-            // Borra una lista guardada
             const deleteNamedList = (name) => {
                 const savedLists = getSavedLists();
                 delete savedLists[name];
@@ -504,21 +652,16 @@
             };
 
             // --- FUNCIONES DE RENDERIZADO Y LÓGICA ---
-
-            // Calcula y muestra el total gastado
             const updateTotal = () => {
                 const total = currentList.reduce((sum, item) => {
-                    return item.bought && item.price ? sum + (item.price * item.quantity) : sum;
+                    return item.price ? sum + (item.price * item.quantity) : sum;
                 }, 0);
-
                 totalAmountSpan.textContent = total.toFixed(2);
                 totalContainer.style.display = currentList.length > 0 ? 'block' : 'none';
             };
 
-            // Renderiza la lista completa de artículos en el DOM
             const renderList = () => {
-                shoppingListUL.innerHTML = ''; // Limpiar la lista antes de renderizar
-
+                shoppingListUL.innerHTML = '';
                 if (currentList.length === 0) {
                     updateTotal();
                     return;
@@ -535,8 +678,8 @@
                             <span class="item-info">${item.text}</span>
                         </div>
                         <div class="item-actions">
-                            <input type="number" class="price-input" placeholder="0.00 €" value="${item.price || ''}" min="0" step="0.01">
-                            <button class="btn btn-danger btn-sm remove-item">❌</button>
+                            <input type="number" class="price-input" placeholder="0.00 €" value="${item.price !== null ? item.price.toFixed(2) : ''}" min="0" step="0.01" aria-label="Precio del artículo">
+                            <button class="btn btn-danger btn-sm remove-item" aria-label="Borrar artículo">❌</button>
                         </div>
                     `;
 
@@ -546,7 +689,6 @@
                 updateTotal();
             };
 
-            // Renderiza las tarjetas de las listas guardadas
             const renderSavedLists = () => {
                 savedListsContainer.innerHTML = '';
                 const savedLists = getSavedLists();
@@ -571,8 +713,8 @@
                             <span>Total Aprox: ${totalValue} €</span>
                         </div>
                         <div class="mt-2 text-end">
-                            <button class="btn btn-load btn-sm btn-list-action" data-name="${name}">📂 Cargar</button>
-                            <button class="btn btn-delete-list btn-sm btn-list-action" data-name="${name}">🗑️ Borrar</button>
+                            <button class="btn btn-load btn-sm btn-list-action" data-name="${name}" aria-label="Cargar lista ${name}">📂 Cargar</button>
+                            <button class="btn btn-delete-list btn-sm btn-list-action" data-name="${name}" aria-label="Borrar lista ${name}">🗑️ Borrar</button>
                         </div>
                     `;
                     savedListsContainer.appendChild(thumbnail);
@@ -580,39 +722,40 @@
             };
 
             // --- MANEJADORES DE EVENTOS ---
-
-            // Añadir un nuevo artículo
             const handleAddItem = () => {
                 const text = newItemInput.value.trim();
                 const quantity = parseInt(itemQuantityInput.value) || 1;
                 if (!text) {
-                    alert('Por favor, escribe el nombre del artículo.');
+                    showMessage('Por favor, escribe el nombre del artículo.');
                     return;
                 }
-
+                if (quantity < 1) {
+                    showMessage('La cantidad debe ser al menos 1.');
+                    return;
+                }
                 currentList.push({ id: Date.now(), text, quantity, price: null, bought: false });
                 newItemInput.value = '';
                 itemQuantityInput.value = 1;
                 newItemInput.focus();
-                
                 saveCurrentListToStorage();
                 renderList();
             };
 
-            // Click en la lista (tachar, borrar, cambiar precio)
             shoppingListUL.addEventListener('click', (e) => {
                 const target = e.target;
                 const li = target.closest('li');
                 if (!li) return;
 
+                if (target.classList.contains('price-input')) {
+                    e.stopPropagation();
+                    return;
+                }
+
                 const index = parseInt(li.dataset.index);
 
-                // Borrar artículo
                 if (target.classList.contains('remove-item')) {
                     currentList.splice(index, 1);
-                }
-                // Tachar artículo
-                else if (target.classList.contains('item-info') || target.classList.contains('item-quantity')) {
+                } else if (target.classList.contains('item-info') || target.classList.contains('item-quantity')) {
                     currentList[index].bought = !currentList[index].bought;
                 }
                 
@@ -620,80 +763,96 @@
                 renderList();
             });
 
-            // Actualizar precio
             shoppingListUL.addEventListener('change', (e) => {
                 const target = e.target;
                 if (target.classList.contains('price-input')) {
                     const li = target.closest('li');
                     const index = parseInt(li.dataset.index);
                     const price = parseFloat(target.value);
-                    currentList[index].price = isNaN(price) ? null : price;
+                    currentList[index].price = isNaN(price) || price < 0 ? null : price;
                     saveCurrentListToStorage();
                     updateTotal();
                 }
             });
-            
-            // Añadir con botón o tecla Enter
+
             addButton.addEventListener('click', handleAddItem);
             newItemInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') handleAddItem();
             });
 
-            // Guardar lista con nombre
             saveListButton.addEventListener('click', () => {
                 if (currentList.length === 0) {
-                    alert('La lista está vacía, no se puede guardar.');
+                    showMessage('La lista está vacía, no se puede guardar.');
                     return;
                 }
-                const name = prompt('Dale un nombre a tu lista:', `Mi Lista - ${new Date().toLocaleDateString()}`);
-                if (name && name.trim()) {
-                    saveNamedList(name.trim(), currentList);
-                    renderSavedLists();
-                    alert(`✅ Lista "${name.trim()}" guardada.`);
-                }
+                const defaultName = `Mi Lista - ${new Date().toLocaleDateString()}`;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = defaultName;
+                input.className = 'form-control';
+                input.style.marginBottom = '10px';
+                input.setAttribute('aria-label', 'Nombre de la lista');
+
+                const messageBox = document.createElement('div');
+                messageBox.appendChild(input);
+                messageText.textContent = 'Dale un nombre a tu lista:';
+                messageText.appendChild(messageBox);
+
+                showMessage('', true, (confirmed) => {
+                    messageText.textContent = '';
+                    if (confirmed && input.value.trim()) {
+                        saveNamedList(input.value.trim(), currentList);
+                        renderSavedLists();
+                        showMessage(`✅ Lista "${input.value.trim()}" guardada.`);
+                    }
+                });
+                input.focus();
             });
 
-            // Cargar o borrar listas guardadas
             savedListsContainer.addEventListener('click', (e) => {
                 const name = e.target.dataset.name;
                 if (!name) return;
 
                 if (e.target.classList.contains('btn-load')) {
-                    if (confirm(`¿Quieres cargar la lista "${name}"? La lista actual se reemplazará.`)) {
-                        const savedLists = getSavedLists();
-                        currentList = savedLists[name];
+                    showMessage(`¿Quieres cargar la lista "${name}"? La lista actual se reemplazará.`, true, (confirmed) => {
+                        if (confirmed) {
+                            const savedLists = getSavedLists();
+                            currentList = savedLists[name];
+                            saveCurrentListToStorage();
+                            renderList();
+                            window.scrollTo(0, 0);
+                        }
+                    });
+                } else if (e.target.classList.contains('btn-delete-list')) {
+                    showMessage(`¿Estás seguro de que quieres borrar la lista "${name}"?`, true, (confirmed) => {
+                        if (confirmed) {
+                            deleteNamedList(name);
+                            renderSavedLists();
+                        }
+                    });
+                }
+            });
+
+            resetButton.addEventListener('click', () => {
+                showMessage('¿Seguro que quieres borrar todos los artículos de la lista actual?', true, (confirmed) => {
+                    if (confirmed) {
+                        currentList = [];
                         saveCurrentListToStorage();
                         renderList();
-                        window.scrollTo(0, 0);
                     }
-                } else if (e.target.classList.contains('btn-delete-list')) {
-                    if (confirm(`¿Estás seguro de que quieres borrar la lista "${name}"?`)) {
-                        deleteNamedList(name);
-                        renderSavedLists();
-                    }
-                }
+                });
             });
 
-            // Resetear la lista actual
-            resetButton.addEventListener('click', () => {
-                if (confirm('¿Seguro que quieres borrar todos los artículos de la lista actual?')) {
-                    currentList = [];
-                    saveCurrentListToStorage();
-                    renderList();
-                }
-            });
-
-            // Exportar a TXT
             exportButton.addEventListener('click', () => {
                 if (currentList.length === 0) {
-                    alert('No hay nada que exportar.');
+                    showMessage('No hay nada que exportar.');
                     return;
                 }
                 
                 let content = '--- MI LISTA DE LA COMPRA ---\n\n';
                 currentList.forEach(item => {
                     const status = item.bought ? '[x]' : '[ ]';
-                    const price = item.price ? `${(item.price * item.quantity).toFixed(2)} €` : '';
+                    const price = item.price ? `${(item.price * item.quantity).toFixed(2)} €` : 'Sin precio';
                     content += `${status} ${item.text} (x${item.quantity}) - ${price}\n`;
                 });
 
@@ -707,7 +866,6 @@
                 a.click();
                 URL.revokeObjectURL(a.href);
             });
-
 
             // --- INICIALIZACIÓN ---
             const init = () => {
