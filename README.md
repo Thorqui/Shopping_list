@@ -1,144 +1,73 @@
-# 📝 Lista de la Compra - Cuaderno Digital
+# 📝 Lista de la Compra
 
-Una aplicación web completa para gestionar listas de la compra con control de presupuestos, persistencia local y sistema de listas guardadas.
-
-## ✨ **Características Principales**
-
-### **🛒 Gestión de Lista Actual**
-- ✅ Añadir productos con cantidad
-- 💰 Editar precios individualmente después de la compra
-- ✅ Tachar productos comprados (suma al total gastado)
-- 🗑️ Eliminar productos con confirmación
-- 📊 Total gastado en tiempo real (solo productos tachados)
-
-### **📚 Sistema de Listas Guardadas**
-- 💾 Guardar listas con nombre personalizado
-- 📂 Cargar listas anteriores
-- 🗑️ Eliminar listas guardadas
-- 📄 Exportar cualquier lista en formato TXT
-- 📋 Miniaturas con resumen (fecha, items, total)
-
-### **🎨 Interfaz de Usuario**
-- 📖 Diseño de "cuaderno de notas" con líneas y tapas marrones
-- ✍️ Fuentes manuscritas (Caveat y Reenie Beanie)
-- 🎭 Modales personalizados para todas las confirmaciones
-- 📱 Totalmente responsive para móviles
-- 🔔 Notificaciones toast para feedback inmediato
-
-### **💾 Persistencia y Seguridad**
-- 🌐 Funciona 100% offline
-- 💻 Guarda en localStorage del navegador
-- 🔄 Recupera datos al recargar la página
-- 🛡️ No requiere servidor ni conexión a internet
-
-## 🚀 **Instalación y Uso**
-
-### **Requisitos**
-- Navegador web moderno (Chrome, Firefox, Safari, Edge)
-- Conexión inicial para cargar Bootstrap y Google Fonts
-
-### **Instalación**
-1. **Descarga** el archivo `lista-de-la-compra.html`
-2. **Abre** el archivo en tu navegador
-3. **¡Listo!** La aplicación funciona inmediatamente
-
-### **Uso Básico**
-1. **Añadir productos**: Escribe el nombre + cantidad + Enter
-2. **Marcar como comprado**: Tacha el checkbox
-3. **Poner precio**: Edita el campo € del producto tachado
-4. **Ver total**: Se actualiza automáticamente
-5. **Guardar lista**: Botón "💾 Guardar" (pide nombre)
-6. **Gestionar listas**: Usa las miniaturas abajo
-
-## 🎯 **Flujo de Trabajo Recomendado**
-1. Añade todos los productos planeados 🛒
-2. Ve al supermercado con la lista 📋
-3. Al comprar, marca ✓ y pon el precio real 💰
-4. El total gastado se actualiza automáticamente 📊
-5. Al terminar, guarda la lista 💾
-6. Para la próxima compra, carga una lista anterior 📂
+Una aplicación web interactiva para gestionar listas de compras, con un diseño inspirado en una libreta manuscrita. Permite añadir artículos, especificar cantidades y precios, tachar elementos comprados, guardar listas y exportarlas como texto.
 
 
-## 🔧 **Funcionalidades Avanzadas**
+## 📋 Descripción
 
-### **Control de Presupuesto**
-- Solo suma productos **tachados** con precio
-- Si destachas un producto, se resta del total
-- Precios editables en cualquier momento
-- Exportación con subtotales detallados
+**Lista de la Compra** es una herramienta sencilla y visual para organizar tus compras. Construida con **HTML5**, **CSS3**, **JavaScript** y **Bootstrap**, ofrece una interfaz responsive con un estilo cálido y funcionalidad para guardar listas en el navegador y exportarlas.
 
-### **Gestión de Listas Múltiples**
-- **Listas ilimitadas** guardadas localmente
-- **Miniaturas informativas** con estadísticas
-- **Carga rápida** reemplazando la actual
-- **Exportación individual** de cada lista
 
-### **Interfaz Intuitiva**
-- **Modales confirmatorios** para acciones destructivas
-- **Toast notifications** para feedback
-- **Animaciones suaves** y hover effects
-- **Teclado shortcuts** (Enter para añadir)
+## 🛠️ Tecnologías Utilizadas
 
-## 📱 **Responsive Design**
-- ✅ **Desktop**: Layout completo con pestañas
-- 📱 **Tablet**: Inputs adaptados horizontalmente
-- 📴 **Móvil**: Inputs verticales, botones grandes
-- 🔍 **Touch-friendly**: Botones y checkboxes grandes
+| Tecnología   | Descripción                     |
+|--------------|---------------------------------|
+| **HTML5**    | Estructura de la aplicación     |
+| **CSS3**     | Estilos y diseño responsive     |
+| **JavaScript** | Lógica de la aplicación       |
+| **Bootstrap** | Componentes y estilos base     |
 
-## 🎨 **Diseño y Estilo**
 
-### **Tema Visual**
-- **Cuaderno físico**: Textura de papel con líneas
-- **Tapas marrones**: Bordes estilo libreta
-- **Degradados**: Colores modernos y profesionales
-- **Iconos emoji**: Interfaz amigable y visual
+## 📂 Estructura del Proyecto
 
-### **Tipografía**
-- **Caveat**: Texto principal (estilo manuscrito)
-- **Reenie Beanie**: Títulos y totales (más decorativa)
-- **Bootstrap**: Componentes UI consistentes
+```plaintext
+ListaDeLaCompra/
+└── index.html      # Archivo principal con HTML, CSS y JavaScript
+```
 
-### **Colores**
-- 🟢 **Verde**: Dinero, éxito, productos comprados
-- 🔴 **Rojo**: Eliminar, advertencias
-- 🟠 **Naranja**: Reset, acciones de limpieza
-- 🟤 **Marrón**: Tema de cuaderno/libreta
+## 🚀 Cómo Usar
+Sigue estos pasos para usar la aplicación:
 
-## 💻 **Tecnologías Usadas**
+Descarga o clona el repositorio  
+```bash
+bashgit clone https://github.com/Thorqui/ListaDeLaCompra.git  
+cd ListaDeLaCompra
+```
 
-- **HTML5**: Estructura semántica
-- **CSS3**: Estilos modernos con Grid/Flexbox
-- **JavaScript ES6+**: Lógica interactiva
-- **Bootstrap 5.3**: Componentes UI responsive
-- **localStorage**: Persistencia de datos
-- **Google Fonts**: Tipografía personalizada
+Abre la aplicación
+Abre el archivo index.html en un navegador
 
-Estructura del Código
+Usa la aplicación
 
-📁 HTML
-├── Estructura responsive con Bootstrap
-├── Modales personalizados
-└── Componentes interactivos
+Escribe el nombre del artículo y la cantidad en los campos de entrada.  
+Haz clic en "Añadir" o presiona Enter para agregar el artículo.  
+Ingresa el precio por unidad en el campo correspondiente.  
+Tacha artículos haciendo clic en el nombre o la cantidad.  
+Guarda la lista con "Guardar Lista" o expórtala como TXT con "Exportar TXT".  
+Carga listas guardadas desde el apartado "Listas Guardadas".  
 
-📁 CSS
-├── Diseño de cuaderno (textura, bordes)
-├── Fuentes manuscritas
-├── Animaciones y transiciones
-└── Responsive breakpoints
 
-📁 JavaScript
-├── Gestión de estado (currentItems, savedLists)
-├── Renderizado dinámico de listas
-├── localStorage CRUD operations
-├── Event listeners completos
-└── Funciones utilitarias (export, toast)
+## 🎮 Características
 
-Exportación de Datos
+Añadir artículos: Ingresa artículos con cantidad y precio.  
+Tachar elementos: Marca artículos como comprados con un clic.  
+Cálculo de total: Muestra el gasto total basado en precios y cantidades.  
+Guardar listas: Almacena listas en el navegador con nombres personalizados.  
+Exportar a TXT: Descarga la lista como archivo de texto.  
+Diseño responsive: Interfaz adaptada a dispositivos móviles y de escritorio.  
 
-LISTA GUARDADA: Mi Compra Semanal
-Fecha: 16/10/2025
-Total: 45.67€
+
+## 👨‍💻 Autor
+Aitor Quilez Herrero (Thorqui)  
+🔗 GitHub - Thorqui
+
+## 💡 Notas Adicionales
+
+No se requiere instalación de dependencias; la aplicación funciona directamente en un navegador moderno.
+Asegúrate de usar un navegador actualizado (Chrome, Firefox, Edge) para una experiencia óptima.
+El repositorio está disponible en: 🌐 https://github.com/Thorqui/ListaDeLaCompra.
 
 ✅ 2x Leche - 1.89€ x 2 = 3.78€
 ⭕ 1x Pan - Sin precio
+
 ✅ 5x Manzanas - 0.45€ x 5 = 2.25€
