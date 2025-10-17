@@ -120,7 +120,7 @@
 
         .form-control {
             border: none;
-            background: rgba(255, 255, 255, 0.95); /* Fondo más opaco */
+            background: rgba(255, 255, 255, 0.95);
             box-shadow: none !important;
             padding: 15px 20px;
             flex: 1;
@@ -430,6 +430,16 @@
             margin-bottom: 20px;
         }
 
+        .message-box input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+        }
+
         .message-buttons {
             display: flex;
             gap: 10px;
@@ -547,6 +557,7 @@
         <div class="message-overlay" id="messageOverlay">
             <div class="message-box">
                 <p id="messageText"></p>
+                <div class="message-input" id="messageInput"></div>
                 <div class="message-buttons" id="messageButtons"></div>
             </div>
         </div>
@@ -569,56 +580,64 @@
             const savedListsContainer = document.getElementById('savedListsContainer');
             const messageOverlay = document.getElementById('messageOverlay');
             const messageText = document.getElementById('messageText');
+            const messageInput = document.getElementById('messageInput');
             const messageButtons = document.getElementById('messageButtons');
 
             // --- ESTADO DE LA APLICACIÓN ---
             let currentList = [];
 
             // --- FUNCIONES DE MENSAJES PERSONALIZADOS ---
-            const showMessage = (text, isConfirm = false, onConfirm = null) => {
+            const showMessage = (text, inputPlaceholder = null, onConfirm = null) => {
                 messageText.textContent = text;
+                messageInput.innerHTML = '';
                 messageButtons.innerHTML = '';
 
-                if (isConfirm) {
-                    const confirmBtn = document.createElement('button');
-                    confirmBtn.className = 'message-button confirm';
-                    confirmBtn.textContent = 'Aceptar';
-                    confirmBtn.onclick = () => {
-                        messageOverlay.classList.remove('show');
-                        if (onConfirm) onConfirm(true);
-                    };
-
-                    const cancelBtn = document.createElement('button');
-                    cancelBtn.className = 'message-button cancel';
-                    cancelBtn.textContent = 'Cancelar';
-                    cancelBtn.onclick = () => {
-                        messageOverlay.classList.remove('show');
-                        if (onConfirm) onConfirm(false);
-                    };
-
-                    messageButtons.appendChild(confirmBtn);
-                    messageButtons.appendChild(cancelBtn);
-                } else {
-                    const okBtn = document.createElement('button');
-                    okBtn.className = 'message-button confirm';
-                    okBtn.textContent = 'OK';
-                    okBtn.onclick = () => messageOverlay.classList.remove('show');
-                    messageButtons.appendChild(okBtn);
+                let input = null;
+                if (inputPlaceholder) {
+                    input = document.createElement('input');
+                    input.type = 'text';
+                    input.placeholder = inputPlaceholder;
+                    input.className = 'form-control';
+                    input.setAttribute('aria-label', inputPlaceholder);
+                    messageInput.appendChild(input);
                 }
 
+                const confirmBtn = document.createElement('button');
+                confirmBtn.className = 'message-button confirm';
+                confirmBtn.textContent = 'Aceptar';
+                confirmBtn.onclick = () => {
+                    messageOverlay.classList.remove('show');
+                    if (onConfirm) onConfirm(input ? input.value.trim() : true);
+                };
+
+                const cancelBtn = document.createElement('button');
+                cancelBtn.className = 'message-button cancel';
+                cancelBtn.textContent = 'Cancelar';
+                cancelBtn.onclick = () => {
+                    messageOverlay.classList.remove('show');
+                    if (onConfirm) onConfirm(null);
+                };
+
+                messageButtons.appendChild(confirmBtn);
+                if (inputPlaceholder) messageButtons.appendChild(cancelBtn);
+                else if (onConfirm) messageButtons.appendChild(cancelBtn);
+                else messageButtons.appendChild(confirmBtn);
+
                 messageOverlay.classList.add('show');
-                messageButtons.children[0].focus();
+                if (input) input.focus();
+                else confirmBtn.focus();
 
                 // Manejo de teclas Enter y Esc
                 const handleKey = (e) => {
-                    if (e.key === 'Enter' && !isConfirm) {
-                        messageOverlay.classList.remove('show');
-                    } else if (e.key === 'Enter' && isConfirm) {
+                    if (e.key === 'Enter' && !inputPlaceholder) {
                         messageOverlay.classList.remove('show');
                         if (onConfirm) onConfirm(true);
+                    } else if (e.key === 'Enter' && input && input.value.trim()) {
+                        messageOverlay.classList.remove('show');
+                        if (onConfirm) onConfirm(input.value.trim());
                     } else if (e.key === 'Escape') {
                         messageOverlay.classList.remove('show');
-                        if (isConfirm && onConfirm) onConfirm(false);
+                        if (onConfirm) onConfirm(null);
                     }
                 };
                 document.addEventListener('keydown', handleKey, { once: true });
@@ -785,28 +804,13 @@
                     showMessage('La lista está vacía, no se puede guardar.');
                     return;
                 }
-                const defaultName = `Mi Lista - ${new Date().toLocaleDateString()}`;
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.value = defaultName;
-                input.className = 'form-control';
-                input.style.marginBottom = '10px';
-                input.setAttribute('aria-label', 'Nombre de la lista');
-
-                const messageBox = document.createElement('div');
-                messageBox.appendChild(input);
-                messageText.textContent = 'Dale un nombre a tu lista:';
-                messageText.appendChild(messageBox);
-
-                showMessage('', true, (confirmed) => {
-                    messageText.textContent = '';
-                    if (confirmed && input.value.trim()) {
-                        saveNamedList(input.value.trim(), currentList);
+                showMessage('Dale un nombre a tu lista:', 'Nombre de la lista', (name) => {
+                    if (name) {
+                        saveNamedList(name, currentList);
                         renderSavedLists();
-                        showMessage(`✅ Lista "${input.value.trim()}" guardada.`);
+                        showMessage(`✅ Lista "${name}" guardada.`);
                     }
                 });
-                input.focus();
             });
 
             savedListsContainer.addEventListener('click', (e) => {
@@ -814,7 +818,7 @@
                 if (!name) return;
 
                 if (e.target.classList.contains('btn-load')) {
-                    showMessage(`¿Quieres cargar la lista "${name}"? La lista actual se reemplazará.`, true, (confirmed) => {
+                    showMessage(`¿Quieres cargar la lista "${name}"? La lista actual se reemplazará.`, null, (confirmed) => {
                         if (confirmed) {
                             const savedLists = getSavedLists();
                             currentList = savedLists[name];
@@ -824,7 +828,7 @@
                         }
                     });
                 } else if (e.target.classList.contains('btn-delete-list')) {
-                    showMessage(`¿Estás seguro de que quieres borrar la lista "${name}"?`, true, (confirmed) => {
+                    showMessage(`¿Estás seguro de que quieres borrar la lista "${name}"?`, null, (confirmed) => {
                         if (confirmed) {
                             deleteNamedList(name);
                             renderSavedLists();
@@ -834,7 +838,7 @@
             });
 
             resetButton.addEventListener('click', () => {
-                showMessage('¿Seguro que quieres borrar todos los artículos de la lista actual?', true, (confirmed) => {
+                showMessage('¿Seguro que quieres borrar todos los artículos de la lista actual?', null, (confirmed) => {
                     if (confirmed) {
                         currentList = [];
                         saveCurrentListToStorage();
@@ -849,22 +853,29 @@
                     return;
                 }
                 
-                let content = '--- MI LISTA DE LA COMPRA ---\n\n';
-                currentList.forEach(item => {
-                    const status = item.bought ? '[x]' : '[ ]';
-                    const price = item.price ? `${(item.price * item.quantity).toFixed(2)} €` : 'Sin precio';
-                    content += `${status} ${item.text} (x${item.quantity}) - ${price}\n`;
+                showMessage('Ingresa un nombre para el archivo:', 'Nombre del archivo', (fileName) => {
+                    if (fileName) {
+                        const date = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+                        const formattedFileName = `lista_compra_${fileName}_${date}.txt`;
+                        
+                        let content = `--- MI LISTA DE LA COMPRA (${date}) ---\n\n`;
+                        currentList.forEach(item => {
+                            const status = item.bought ? '[x]' : '[ ]';
+                            const price = item.price ? `${(item.price * item.quantity).toFixed(2)} €` : 'Sin precio';
+                            content += `${status} ${item.text} (x${item.quantity}) - ${price}\n`;
+                        });
+
+                        const total = parseFloat(totalAmountSpan.textContent).toFixed(2);
+                        content += `\n-----------------------------\nTOTAL GASTADO: ${total} €`;
+
+                        const blob = new Blob([content], { type: 'text/plain' });
+                        const a = document.createElement('a');
+                        a.href = URL.createObjectURL(blob);
+                        a.download = formattedFileName;
+                        a.click();
+                        URL.revokeObjectURL(a.href);
+                    }
                 });
-
-                const total = parseFloat(totalAmountSpan.textContent).toFixed(2);
-                content += `\n-----------------------------\nTOTAL GASTADO: ${total} €`;
-
-                const blob = new Blob([content], { type: 'text/plain' });
-                const a = document.createElement('a');
-                a.href = URL.createObjectURL(blob);
-                a.download = 'lista_compra.txt';
-                a.click();
-                URL.revokeObjectURL(a.href);
             });
 
             // --- INICIALIZACIÓN ---
