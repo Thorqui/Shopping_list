@@ -65,9 +65,10 @@ Aitor Quilez Herrero (Thorqui)
 
 No se requiere instalación de dependencias; la aplicación funciona directamente en un navegador moderno.
 Asegúrate de usar un navegador actualizado (Chrome, Firefox, Edge) para una experiencia óptima.
-El repositorio está disponible en: 🌐 https://github.com/Thorqui/ListaDeLaCompra.
+El repositorio está disponible en: 🌐 https://thorqui.github.io/Shopping_list/
 
 ✅ 2x Leche - 1.89€ x 2 = 3.78€
 ⭕ 1x Pan - Sin precio
 
 ✅ 5x Manzanas - 0.45€ x 5 = 2.25€
+
